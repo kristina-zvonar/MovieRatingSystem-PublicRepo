@@ -1,0 +1,11 @@
+﻿<CascadingValue Value=this>
+    @ChildContent
+</CascadingValue>
+
+
+@if (!string.IsNullOrWhiteSpace(UserMessage))
+{
+    <div class="error-ui-custom">
+        An error has occurred. @UserMessage
+    </div>
+}

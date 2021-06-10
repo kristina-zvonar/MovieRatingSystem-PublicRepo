@@ -1,0 +1,26 @@
+﻿@page "/ratingoverview"
+@attribute [Authorize]
+
+<div class="cw-480 ch-220">
+    <DxTabs @bind-ActiveTabIndex="@ActiveTabIndex">
+        <DxTab Text="Movies"></DxTab>
+        <DxTab Text="TV Shows"></DxTab>
+    </DxTabs>
+    <div class="card dxbs-border-top-0 dxbs-border-radius-top-0">
+        <div class="card-body">
+            @switch (ActiveTabIndex)
+            {
+                case 0:
+                    <RatingOverview TypeID="1" />
+                    break;
+                case 1:
+                    <RatingOverview TypeID="2" />
+                    break;
+            }
+        </div>
+    </div>
+</div>
+
+@code {
+    int ActiveTabIndex { get; set; } = 0;
+}

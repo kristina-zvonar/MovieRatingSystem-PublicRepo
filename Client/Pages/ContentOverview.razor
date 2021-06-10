@@ -1,0 +1,43 @@
+﻿@using MovieRatingSystem.Shared
+@using MovieRatingSystem.Shared.View
+
+<DxTextBox NullText="Enter text to search" @bind-Text="@SearchTerm" BindValueMode="BindValueMode.OnInput" @oninput="OnTextChanged"></DxTextBox>
+<DxDataGrid Data="@Content" CssClass="w-100 h-100" 
+            ShowPager="true"
+                PagerNavigationMode=@PagerNavigationMode.InputBox
+                PagerPageSizeSelectorVisible="true"
+                PagerAllDataRowsItemVisible="true"
+                PagerAllowedPageSizes=@(new int[] {10})>
+    <Columns>
+        <DxDataGridColumn Field="Title" />
+        <DxDataGridColumn Field="Description">
+            <DisplayTemplate>
+                @{
+                    string description = (context as ContentViewModel)?.Description;
+                    <div class="d-block text-truncate" title="@description" style="max-width: 200px">
+                        @description
+                    </div>
+                }
+            </DisplayTemplate>
+        </DxDataGridColumn>
+        <DxDataGridDateEditColumn Field="ReleaseDate" DisplayFormat="D" EditorFormat="d" EditorDisplayFormat="D" />
+        <DxDataGridColumn Field="Cast" />
+        <DxDataGridColumn Field="AverageRating">
+            <DisplayTemplate>
+                @{ 
+                    decimal averageRating = (context as ContentViewModel)?.AverageRating ?? 0;
+                    <i class="fas fa-star"></i> @averageRating 
+                }
+            </DisplayTemplate>
+        </DxDataGridColumn>
+        <DxDataGridColumn Field="CoverImage">
+            <DisplayTemplate>
+                @{
+                    string url = (context as ContentViewModel)?.CoverImage;
+                    string alt = (context as ContentViewModel)?.Title + " Cover";
+                    <img style="max-width:100px;max-height:50px;" src="@url" alt="@alt" />
+                }
+            </DisplayTemplate>
+        </DxDataGridColumn>
+    </Columns>
+</DxDataGrid>

@@ -1,0 +1,36 @@
+﻿@using MovieRatingSystem.Shared
+@using MovieRatingSystem.Shared.View
+
+@if (Content == null)
+{
+    <p><em>Loading...</em></p>
+}
+else
+{
+    <table class="table">
+        <thead>
+            <tr>                
+                <th>Title</th>
+                <th>Average Rating</th>
+                <th>My Rating</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var content in Content)
+            {
+                <tr>
+                    <td>@content.Title</td>
+                    <td><i class="fas fa-star"></i> @content.AverageRating</td>                    
+                    <td style="display:inline-block">
+                        <div>
+                            <DxSpinEdit MinValue="1" MaxValue="5" Increment="1" @bind-Value="@content.MyRating"></DxSpinEdit>                            
+                            <DxButton Text="Save" CssClass="pull-right" Click="@((args) => OnSaveRatingButtonClicked(content.ID))"></DxButton>
+                        </div>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+
