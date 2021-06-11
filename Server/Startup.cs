@@ -34,9 +34,9 @@ namespace MovieRatingSystem.Server
             services.AddCors(options =>
             {
                 options.AddPolicy("CorsPolicy",
-                    builder => builder
-                                       .AllowAnyMethod()
-                                       .AllowAnyHeader());
+                    builder => builder.AllowAnyOrigin()
+                                      .WithMethods("GET", "PUT")                                       
+                                      .AllowAnyHeader());
             });
 
             string connectionString = Configuration.GetConnectionString("DefaultConnection");
